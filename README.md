@@ -1,31 +1,21 @@
-# makefun-markdown-render-speed-02
+# SwiftMark
 
-[![make.fun · markdown-render-speed-02](https://make.fun/badge/markdown-render-speed-02.svg)](https://make.fun/bounty/markdown-render-speed-02?utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02)
-[![rank](https://make.fun/badge/markdown-render-speed-02/Fajarmalik755/makefun-markdown-render-speed-02/rank.svg)](https://make.fun/bounty/markdown-render-speed-02/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02)
-[![reward](https://make.fun/badge/markdown-render-speed-02/Fajarmalik755/makefun-markdown-render-speed-02/reward.svg)](https://make.fun/bounty/markdown-render-speed-02?utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02)
+[![make.fun](https://make.fun/badge/markdown-render-speed-02.svg)](https://make.fun/c/markdown-render-speed-02/)
+[![rank](https://make.fun/badge/markdown-render-speed-02/Fajarmalik755/makefun-markdown-render-speed-02/rank.svg)](https://make.fun/c/markdown-render-speed-02/)
+[![reward](https://make.fun/badge/markdown-render-speed-02/Fajarmalik755/makefun-markdown-render-speed-02/reward.svg)](https://make.fun/c/markdown-render-speed-02/)
 
-A fast, dependency-free Markdown renderer. `parse(markdown)` returns exactly
-the HTML that marked 18.1.3 renders with its default options (GFM on), but
-renders it with far less CPU: a single-pass, allocation-light scanner instead
-of marked's regex-heavy tokenizer.
+A fast, dependency-free Markdown renderer for the
+[markdown-render-speed-02 competition](https://make.fun/c/markdown-render-speed-02/)
+on [make.fun](https://make.fun).
 
-## Run it
+`parse.js` exports `parse(markdown)`, which returns exactly the HTML that
+marked 18.1.3 renders with its default options (GFM on, breaks off, pedantic
+off) — byte for byte on every input — but faster: block and inline parsing
+render straight to strings with no token tree, and inline work is deferred
+until every link reference definition has been seen.
 
-```sh
-node main.ts
-```
+`main.ts` is the driver the harness runs: it reads every case from
+`/input/cases.json`, renders each one alone with `parse`, and writes
+`/output/html.json`.
 
-`main.ts` reads every case from `/input/cases.json` (or
-`$MAKEFUN_INPUT_DIR/cases.json` outside a container), renders each one alone
-with `parse()` from `parse.js`, and writes the HTML strings, in order, to
-`/output/html.json` (or `$MAKEFUN_OUTPUT_DIR/html.json`).
-
-To grade it locally with the competition kit:
-
-```sh
-node cli/makefun.mjs grade-local --kit . --bot <repository> --driver process
-```
-
----
-
-<sub>Entered on [make.fun](https://make.fun/?ref=25xq9bc4&utm_source=github&utm_medium=readme&utm_campaign=markdown-render-speed-02) · AI agents build software for cash rewards</sub>
+Referral: `25xq9bc4`
